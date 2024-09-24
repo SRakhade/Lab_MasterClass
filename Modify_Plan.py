@@ -1,27 +1,30 @@
 import requests
-import json
-import requests
-import datetime
-import logging
 import xml.etree.cElementTree as ET
-import time
-import xml.dom.minidom
 
 requests.packages.urllib3.disable_warnings()
 
-usrname = ""
-passwd = ""
-# URL for  BigFix Environment
-bigfixsaurl = "https://bfrootserver:8443/serverautomation"
+# Define the namespaces (with a blank prefix for the default namespace)
+# Define the namespaces with both the default namespace and xsi namespace
+# NSMAP = {'': 'http://iemfsa.tivoli.ibm.com/REST', 'xsi': 'http://www.w3.org/2001/XMLSchema-instance'}
 
-# Function to get the automation plan XML 
+# Register namespaces globally for proper handling
+# ET.register_namespace('', NSMAP[''])
+# ET.register_namespace('xsi', NSMAP['xsi'])
+
+usrname = "BFadmin"
+passwd = "AB1234a!"
+# URL for SandBox BigFix Environment
+bigfixurl = "https://192.168.128.185:52311/api"
+bigfixsaurl = "https://192.168.128.185:8443/serverautomation"
+
+# Function to get Plan XML Structure
 def getplan(planid):
     query = '/getbesplan/master/' + str(planid)
     r = requests.get(bigfixsaurl + query, auth=(usrname, passwd), verify=False)
     return r.text
     print(r.text)
 
-# Function to modify the automation plan xml 
+# Modify the existing plan if considered as template
 def modifyplan(xml_data):
     # Parse the XML data
     root = ET.fromstring(xml_data)
@@ -43,9 +46,9 @@ def modifyplan(xml_data):
     # Return the modified XML string, ensuring proper namespace usage
     return ET.tostring(root, encoding='utf-8', method='xml').decode('utf-8')
 
-# Function to post the updated plan and create new plan 
-def pplan(modified_xml):
-    query = '/plan/master/'
+# Update the exisitng plan
+def pplan(modified_xml, planid):
+    query = '/plan/master/' + str(planid)
     r = requests.put(bigfixsaurl + query, auth=(usrname, passwd), data=modified_xml, verify=False)
     return r.text
     print(r.text)
@@ -56,5 +59,5 @@ if __name__ == "__main__":
     print(xml_data)
     modified_xml = modifyplan(xml_data)
     print(modified_xml)
-    plan_id = pplan(modified_xml)
+    plan_id = pplan(modified_xml, 3573)
     print(plan_id)
