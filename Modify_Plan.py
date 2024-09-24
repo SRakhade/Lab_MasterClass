@@ -12,8 +12,7 @@ requests.packages.urllib3.disable_warnings()
 usrname = ""
 passwd = ""
 # URL for  BigFix Environment
-#bigfixurl = "https://<RootServername>:52311/api"
-bigfixsaurl = "https://<RootServername>:8443/serverautomation"
+bigfixsaurl = "https://bfrootserver:8443/serverautomation"
 
 # Function to get the automation plan XML 
 def getplan(planid):
