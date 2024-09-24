@@ -46,7 +46,7 @@ def modifyplan(xml_data):
 # Function to post the updated plan and create new plan 
 def pplan(modified_xml):
     query = '/plan/master/'
-    r = requests.post(bigfixsaurl + query, auth=(usrname, passwd), data=modified_xml, verify=False)
+    r = requests.put(bigfixsaurl + query, auth=(usrname, passwd), data=modified_xml, verify=False)
     return r.text
     print(r.text)
 
