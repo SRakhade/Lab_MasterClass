@@ -1,21 +1,11 @@
 import requests
 import xml.etree.cElementTree as ET
-
 requests.packages.urllib3.disable_warnings()
 
-# Define the namespaces (with a blank prefix for the default namespace)
-# Define the namespaces with both the default namespace and xsi namespace
-# NSMAP = {'': 'http://iemfsa.tivoli.ibm.com/REST', 'xsi': 'http://www.w3.org/2001/XMLSchema-instance'}
-
-# Register namespaces globally for proper handling
-# ET.register_namespace('', NSMAP[''])
-# ET.register_namespace('xsi', NSMAP['xsi'])
-
-usrname = "BFadmin"
-passwd = "AB1234a!"
+usrname = ""
+passwd = "!"
 # URL for SandBox BigFix Environment
-bigfixurl = "https://192.168.128.185:52311/api"
-bigfixsaurl = "https://192.168.128.185:8443/serverautomation"
+bigfixsaurl = "https://bfrootserver:8443/serverautomation"
 
 # Function to get Plan XML Structure
 def getplan(planid):
