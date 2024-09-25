@@ -33,7 +33,7 @@ def modifyplan(xml_data):
     # Modify the plan name to "Demo_AutomationPlan-Python"
     plan = root.find('{http://iemfsa.tivoli.ibm.com/REST}plan')
     if plan is not None:
-        plan.set('name', 'Demo_AutomationPlan-Python')
+        plan.set('name', 'Demo_AutomationPlan-MODIFIED')
 
     # Ensure that empty elements use both opening and closing tags
     for elem in root.iter():
