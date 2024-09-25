@@ -14,7 +14,7 @@ def create_plan(xml_input):
 
     # Check and print the response
     if response.status_code == 200:
-        print("Request was successful!")
+        print("Plan created successfully!")
     else:
         print(f"Request failed with status code {response.status_code}")
         
