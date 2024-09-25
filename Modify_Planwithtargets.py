@@ -14,15 +14,22 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 usrname = ""
 passwd = ""
 
-# URL for SandBox BigFix Environment
+# URL for BigFix Environment
 bigfixsaurl = "https://bfrootserver:8443/serverautomation"
 
 
 def fetchplan(ap_id):
     query = '/plan/master/' + str(ap_id)
-    r = requests.get(bigfixsaurl + query, auth=(usrname, passwd), verify=False)
-    if r.status_code == 200:
-        return r.text
+    response = requests.get(bigfixsaurl + query, auth=(usrname, passwd), verify=False)
+    print(f"Status Code: {response.status_code}")
+    print(f"Response Content: {response.text}")
+
+    # Check and print the response
+    if response.status_code == 200:
+        return response.text
+        print("Plan retrieved successful")
+    else:
+        print(f"Request failed with status code {response.status_code}")
 
 def targetset(xml_string):
     # Parse the XML string
