@@ -3,16 +3,23 @@ import xml.etree.cElementTree as ET
 requests.packages.urllib3.disable_warnings()
 
 usrname = ""
-passwd = "!"
-# URL for SandBox BigFix Environment
+passwd = ""
+# URL for  BigFix Environment
 bigfixsaurl = "https://bfrootserver:8443/serverautomation"
 
 # Function to get Plan XML Structure
 def getplan(planid):
     query = '/getbesplan/master/' + str(planid)
-    r = requests.get(bigfixsaurl + query, auth=(usrname, passwd), verify=False)
-    return r.text
-    print(r.text)
+    response = requests.get(bigfixsaurl + query, auth=(usrname, passwd), verify=False)
+    print(f"Status Code: {response.status_code}")
+    print(f"Response Content: {response.text}")
+
+    # Check and print the response
+    if response.status_code == 200:
+        return response.text
+        print("Plan retrieved successful")
+    else:
+        print(f"Request failed with status code {response.status_code}")
 
 # Modify the existing plan if considered as template
 def modifyplan(xml_data):
@@ -39,9 +46,16 @@ def modifyplan(xml_data):
 # Update the exisitng plan
 def pplan(modified_xml, planid):
     query = '/plan/master/' + str(planid)
-    r = requests.put(bigfixsaurl + query, auth=(usrname, passwd), data=modified_xml, verify=False)
-    return r.text
-    print(r.text)
+    response = requests.put(bigfixsaurl + query, auth=(usrname, passwd), data=modified_xml, verify=False)
+    print(f"Status Code: {response.status_code}")
+    print(f"Response Content: {response.text}")
+
+    # Check and print the response
+    if response.status_code == 200:
+        return response.text
+        print("Plan modification successful")
+    else:
+        print(f"Request failed with status code {response.status_code}")
 
 
 if __name__ == "__main__":
