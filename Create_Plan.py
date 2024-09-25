@@ -2,20 +2,27 @@ import requests
 
 usrname = ""
 passwd = ""
-# URL for SandBox BigFix Environment
+# URL for  BigFix SA API Environment
 bigfixsaurl = "https://bfrootserver:8443/serverautomation"
 
 def create_plan(xml_input):
     query = '/plan/master/'
-    r = requests.post(bigfixsaurl + query, auth=(usrname, passwd), data=xml_input, verify=False)
-    return r.text
-    print(r.text)
+    # query = '/plan/{customsitename}/'
+    response = requests.post(bigfixsaurl + query, auth=(usrname, passwd), data=xml_input, verify=False)
+    print(f"Status Code: {response.status_code}")
+    print(f"Response Content: {response.text}")
 
+    # Check and print the response
+    if response.status_code == 200:
+        print("Request was successful!")
+    else:
+        print(f"Request failed with status code {response.status_code}")
+        
 if __name__ == "__main__":
     xml_input = '''<?xml version="1.0" encoding="UTF-8"?>
     <sa-rest xmlns="http://iemfsa.tivoli.ibm.com/REST" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <plan name="CreatePlan" domain="ALL CONTENT" pending-restart="PausePlan" version="2.0" source-plan-id="undefined" prefetch="false" source-plan-site-url="undefined">
-        <description>TEST</description>
+    <plan name="Demo_CreatePlan" domain="ALL CONTENT" pending-restart="PausePlan" version="2.0" source-plan-id="undefined" prefetch="false" source-plan-site-url="undefined">
+        <description>API Create Plan</description>
         <category></category>
         <source></source>
         <source-severity></source-severity>
