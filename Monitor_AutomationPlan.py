@@ -2,7 +2,7 @@ import requests
 
 usrname = ""
 passwd = ""
-#URL for SandBox BigFix Environment
+#URL for  BigFix Environment
 bigfixurl = "https://bfrootserver:52311/api"
 bigfixsaurl = "https://bfrootserver:8443/serverautomation"
 
