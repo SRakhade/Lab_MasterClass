@@ -3,7 +3,7 @@ import requests
 usrname = ""
 passwd = ""
 # URL for  BigFix SA API Environment
-bigfixsaurl = "https://bfrootserver:8443/serverautomation"
+bigfixsaurl = "https://10.0.0.1:8443/serverautomation"
 
 def create_plan(xml_input):
     query = '/plan/master/'
