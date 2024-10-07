@@ -5,7 +5,7 @@ requests.packages.urllib3.disable_warnings()
 usrname = ""
 passwd = ""
 # URL for  BigFix Environment
-bigfixsaurl = "https://bfrootserver:8443/serverautomation"
+bigfixsaurl = "https://10.0.0.1:8443/serverautomation"
 
 # Function to get Plan XML Structure
 def getplan(planid):
@@ -59,9 +59,9 @@ def pplan(modified_xml, planid):
 
 
 if __name__ == "__main__":
-    xml_data = getplan(3573)
+    xml_data = getplan(227)
     print(xml_data)
     modified_xml = modifyplan(xml_data)
     print(modified_xml)
-    plan_id = pplan(modified_xml, 3573)
+    plan_id = pplan(modified_xml, 227)
     print(plan_id)
