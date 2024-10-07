@@ -31,6 +31,7 @@ $searchBody = @"
 $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
 # Invoke-RestMethod -Method Post -Uri $searchURI -Credential $cred -Body $searchBody -ContentType "application/xml"
 [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 $searchResults = Invoke-RestMethod -Method Post -Uri $searchURI -Credential $cred -Body $searchBody -ContentType "application/xml" -Headers $headers
 write-host $searchResults.OuterXml
