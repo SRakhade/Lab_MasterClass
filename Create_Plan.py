@@ -48,6 +48,3 @@ if __name__ == "__main__":
 
   # Function to create a Plan 
     planid = create_plan(xml_input)
-  # Print the Plan id post creation
-    print(planid)
-    
